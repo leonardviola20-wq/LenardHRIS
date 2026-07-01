@@ -46,6 +46,21 @@ namespace LenardHRIS.View
             PnlMain.Controls.Add(dashboard);
         }
         #endregion
+        public void ShowControl(UserControl control)
+        {
+            // Clear the panel before adding new content
+            PnlMain.Controls.Clear();
+
+            // Make the control fill the panel
+            control.Dock = DockStyle.Fill;
+
+            // Add it into PnlMain
+            PnlMain.Controls.Add(control);
+
+            // Bring it to front so it’s visible
+            control.BringToFront();
+        }
+
 
         #region Private Members
         //
@@ -68,7 +83,7 @@ namespace LenardHRIS.View
             PnlMain.Controls.Clear();
 
             // Create a new EmployeesView UserControl
-            EmployeesView employeesView = new EmployeesView();
+            EmployeesListControl employeesView = new EmployeesListControl();
 
             // Make sure it fills the panel
             employeesView.Dock = DockStyle.Fill;

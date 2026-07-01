@@ -34,7 +34,7 @@ namespace LenardHRIS.View
             // 
             this.PnlSidebar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.PnlSidebar.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.PnlSidebar.BackColor = System.Drawing.SystemColors.HotTrack;
             this.PnlSidebar.Controls.Add(this.BtnSettings);
             this.PnlSidebar.Controls.Add(this.BtnLogout);
             this.PnlSidebar.Controls.Add(this.BtnReports);
@@ -50,6 +50,7 @@ namespace LenardHRIS.View
             // BtnSettings
             // 
             this.BtnSettings.FlatAppearance.BorderColor = System.Drawing.SystemColors.WindowFrame;
+            this.BtnSettings.FlatAppearance.BorderSize = 0;
             this.BtnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.BtnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BtnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -67,13 +68,14 @@ namespace LenardHRIS.View
             // BtnLogout
             // 
             this.BtnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.BtnLogout.BackColor = System.Drawing.Color.Navy;
             this.BtnLogout.FlatAppearance.BorderColor = System.Drawing.SystemColors.WindowFrame;
+            this.BtnLogout.FlatAppearance.BorderSize = 0;
             this.BtnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BtnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.BtnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnLogout.Font = new System.Drawing.Font("Calibri", 14F);
-            this.BtnLogout.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnLogout.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnLogout.Location = new System.Drawing.Point(0, 413);
             this.BtnLogout.Name = "BtnLogout";
             this.BtnLogout.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -87,6 +89,7 @@ namespace LenardHRIS.View
             // BtnReports
             // 
             this.BtnReports.FlatAppearance.BorderColor = System.Drawing.SystemColors.WindowFrame;
+            this.BtnReports.FlatAppearance.BorderSize = 0;
             this.BtnReports.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.BtnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BtnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -104,6 +107,7 @@ namespace LenardHRIS.View
             // BtnEmployers
             // 
             this.BtnEmployers.FlatAppearance.BorderColor = System.Drawing.SystemColors.WindowFrame;
+            this.BtnEmployers.FlatAppearance.BorderSize = 0;
             this.BtnEmployers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.BtnEmployers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BtnEmployers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -121,6 +125,7 @@ namespace LenardHRIS.View
             // BtnEmployees
             // 
             this.BtnEmployees.FlatAppearance.BorderColor = System.Drawing.SystemColors.WindowFrame;
+            this.BtnEmployees.FlatAppearance.BorderSize = 0;
             this.BtnEmployees.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.BtnEmployees.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BtnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -139,6 +144,7 @@ namespace LenardHRIS.View
             // BtnDashboard
             // 
             this.BtnDashboard.FlatAppearance.BorderColor = System.Drawing.SystemColors.WindowFrame;
+            this.BtnDashboard.FlatAppearance.BorderSize = 0;
             this.BtnDashboard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.BtnDashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BtnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

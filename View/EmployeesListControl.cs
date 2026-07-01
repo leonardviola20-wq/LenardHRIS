@@ -154,33 +154,6 @@ namespace LenardHRIS.View
             BtnNext.Enabled = pageNumber < totalPages;
         }
 
-        public FrmMain.EmployeeFilterState GetCurrentFilterState()
-        {
-            var branch = CboBranch.SelectedValue;
-            var status = CboEmploymentStatus.SelectedValue;
-
-            MessageBox.Show($"GetCurrentFilterState: Branch={branch}, Status={status}");
-
-            return new FrmMain.EmployeeFilterState
-            {
-                BranchId = branch as int?,
-                StatusId = status as int?
-            };
-        }
-
-        public void ApplyFilter(FrmMain.EmployeeFilterState state)
-        {
-            if (state == null) return;
-
-            if (state.BranchId.HasValue)
-                CboBranch.SelectedValue = state.BranchId.Value;
-
-            if (state.StatusId.HasValue)
-                CboEmploymentStatus.SelectedValue = state.StatusId.Value;
-
-            LoadEmployees();
-        }
-
         private void DgvEmployeesList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             if (!DgvEmployeesList.Columns.Contains("No"))
@@ -198,7 +171,6 @@ namespace LenardHRIS.View
                 DgvEmployeesList.Rows[i].Cells["No"].Value = (i + 1).ToString();
             }
         }
-
 
         private void UpdateSummaryPanels()
         {
@@ -227,9 +199,9 @@ namespace LenardHRIS.View
             LblNewCount.Text = newEmployees.ToString();
         }
 
-        private void LoadEmployees(FrmMain.EmployeeFilterState filterState = null)
+        private void LoadEmployees()
         {
-            string connStr = ConfigurationManager.ConnectionStrings["HRDB"].ConnectionString;
+            string connStr = ConfigurationManager.ConnectionStrings["LenardHRDB"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -245,30 +217,9 @@ namespace LenardHRIS.View
                 DateStarted,
                 Remarks
             FROM Employees
-            WHERE 1=1"; // dummy condition
-
-                // Apply filters if provided
-                if (filterState != null)
-                {
-                    if (filterState.BranchId.HasValue)
-                        sql += " AND DepartmentID = @BranchId";
-
-                    if (filterState.StatusId.HasValue)
-                        sql += " AND EmploymentStatusID = @StatusId";
-                }
-
-                sql += " ORDER BY Department, FullName";
+            ORDER BY Department, FullName";
 
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-
-                if (filterState != null)
-                {
-                    if (filterState.BranchId.HasValue)
-                        da.SelectCommand.Parameters.AddWithValue("@BranchId", filterState.BranchId.Value);
-
-                    if (filterState.StatusId.HasValue)
-                        da.SelectCommand.Parameters.AddWithValue("@StatusId", filterState.StatusId.Value);
-                }
 
                 employeesTable = new DataTable();
                 da.Fill(employeesTable);
@@ -279,16 +230,6 @@ namespace LenardHRIS.View
 
             AdjustColumnWidths();
             DgvEmployeesList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            // Restore filter controls so UI matches state
-            if (filterState != null)
-            {
-                if (filterState.BranchId.HasValue)
-                    CboBranch.SelectedValue = filterState.BranchId.Value;
-
-                if (filterState.StatusId.HasValue)
-                    CboEmploymentStatus.SelectedValue = filterState.StatusId.Value;
-            }
 
             if (DgvEmployeesList.Columns.Contains("EmployeeID"))
                 DgvEmployeesList.Columns["EmployeeID"].Visible = false;
@@ -447,22 +388,6 @@ namespace LenardHRIS.View
             }
         }
 
-        private void BtnAddEmployee_Click(object sender, EventArgs e)
-        {
-            // Capture current filters
-            var filterState = this.GetCurrentFilterState();
-
-            // Create AddEmployeeControl with filter state
-            var addEmployeeControl = new AddEmployeeControl(0, filterState);
-            // Use 0 or null to indicate "new employee"
-
-            var parentForm = this.FindForm() as FrmMain;
-            if (parentForm != null)
-            {
-                parentForm.ShowControl(addEmployeeControl);
-            }
-        }
-
         private void DgvEmployeesList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -473,43 +398,40 @@ namespace LenardHRIS.View
                 if (DgvEmployeesList.Columns[e.ColumnIndex].Name == "ViewButton")
                 {
                     var uc = new EmployeesViewControl(employeeId);
-                    mainForm?.ShowControl(uc);
+                    mainForm?.ShowControl(uc);   // display in PnlMain
                 }
                 else if (DgvEmployeesList.Columns[e.ColumnIndex].Name == "UpdateButton")
                 {
-                    // Capture current filters before navigating
-                    var filterState = this.GetCurrentFilterState();
-
-                    var uc = new AddEmployeeControl(employeeId, filterState);
-                    mainForm?.ShowControl(uc);
+                    var uc = new AddEmployeeControl(employeeId);
+                    mainForm?.ShowControl(uc);   // display in PnlMain
                 }
             }
         }
 
         private void DgvEmployeesList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (DgvEmployeesList.Columns[e.ColumnIndex].Name == "UpdateButton" && e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
                 int employeeId = Convert.ToInt32(DgvEmployeesList.Rows[e.RowIndex].Cells["EmployeeID"].Value);
-                MessageBox.Show("Update clicked for EmployeeID: " + employeeId);
-
-                var filterState = this.GetCurrentFilterState();
-                MessageBox.Show($"Captured filter state: Branch={filterState.BranchId}, Status={filterState.StatusId}");
-
-                var uc = new AddEmployeeControl(employeeId, filterState);
-
                 var mainForm = this.ParentForm as FrmMain;
-                if (mainForm != null)
+
+                if (DgvEmployeesList.Columns[e.ColumnIndex].Name == "ViewButton")
                 {
-                    MessageBox.Show("Navigating to AddEmployeeControl...");
-                    mainForm.ShowControl(uc);
+                    var uc = new EmployeesViewControl(employeeId);
+                    mainForm?.ShowControl(uc);   // display in PnlMain
+                }
+                else if (DgvEmployeesList.Columns[e.ColumnIndex].Name == "UpdateButton")
+                {
+                    var uc = new AddEmployeeControl(employeeId);
+                    mainForm?.ShowControl(uc);   // display in PnlMain
                 }
             }
         }
 
+
         private void ImportEmployeesFromCsv(string filePath)
         {
-            string connStr = ConfigurationManager.ConnectionStrings["HRDB"].ConnectionString;
+            string connStr = ConfigurationManager.ConnectionStrings["LenardHRDB"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -654,7 +576,7 @@ namespace LenardHRIS.View
         
         private void ExportEmployeesToCsv(string filePath)
         {
-            string connStr = ConfigurationManager.ConnectionStrings["HRDB"].ConnectionString;
+            string connStr = ConfigurationManager.ConnectionStrings["LenardHRDB"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -734,6 +656,18 @@ namespace LenardHRIS.View
                     MessageBox.Show($"Import failed: {ex.Message}", "Import Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void BtnAddEmployee_Click(object sender, EventArgs e)
+        {
+            // Create AddEmployeeControl for new employee (use 0 to indicate new)
+            var addEmployeeControl = new AddEmployeeControl(0);
+
+            var parentForm = this.FindForm() as FrmMain;
+            if (parentForm != null)
+            {
+                parentForm.ShowControl(addEmployeeControl);
             }
         }
     }

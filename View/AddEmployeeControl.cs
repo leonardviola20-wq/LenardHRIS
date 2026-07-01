@@ -17,13 +17,12 @@ namespace LenardHRIS.View
     {
         private int? _employeeId;
         private string _photoPath;
-        private FrmMain.EmployeeFilterState _filterState;
+        //private FrmMain.EmployeeFilterState _filterState;
         
-        public AddEmployeeControl(int employeeId, FrmMain.EmployeeFilterState filterState)
+        public AddEmployeeControl(int employeeId)
         {
             InitializeComponent();
             _employeeId = employeeId;
-            _filterState = filterState;
             LoadEmployeeData();
 
             // Default placeholder
@@ -49,7 +48,7 @@ namespace LenardHRIS.View
 
             LblAddEmployee.Text = "Update Employee";
 
-            string connStr = ConfigurationManager.ConnectionStrings["HRDB"].ConnectionString;
+            string connStr = ConfigurationManager.ConnectionStrings["LenardHRDB"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -279,7 +278,7 @@ namespace LenardHRIS.View
         {
             try
             {
-                string connStr = ConfigurationManager.ConnectionStrings["HRDB"].ConnectionString;
+                string connStr = ConfigurationManager.ConnectionStrings["LenardHRDB"].ConnectionString;
 
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
@@ -372,9 +371,7 @@ namespace LenardHRIS.View
                             MessageBox.Show($"Employee record {action} successfully!",
                                 "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            var mainForm = this.ParentForm as FrmMain;
-                            MessageBox.Show($"Returning with filter state: Branch={_filterState?.BranchId}, Status={_filterState?.StatusId}");
-                            mainForm?.ShowEmployeesList(_filterState);
+                            var mainForm = this.ParentForm as FrmMain;                            
                         }
                         else
                         {
@@ -393,9 +390,13 @@ namespace LenardHRIS.View
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            var mainForm = this.ParentForm as FrmMain;
-            MessageBox.Show($"Cancel returning with filter state: Branch={_filterState?.BranchId}, Status={_filterState?.StatusId}");
-            mainForm?.ShowEmployeesList(_filterState);
+            var parentForm = this.FindForm() as FrmMain;
+            if (parentForm != null)
+            {
+                // Navigate back to the EmployeesListControl
+                var employeesList = new EmployeesListControl();
+                parentForm.ShowControl(employeesList);
+            }
         }
 
         private void ApplyEmploymentStatusRules()

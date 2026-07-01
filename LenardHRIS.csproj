@@ -49,7 +49,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,17 +65,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="obj\Release\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="View\AddEmployeeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\AddEmployeeControl.Designer.cs">
+      <DependentUpon>AddEmployeeControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\DashboardView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\DashboardView.Designer.cs">
       <DependentUpon>DashboardView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\EmployeesView.cs">
+    <Compile Include="View\EmployeesListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\EmployeesView.Designer.cs">
-      <DependentUpon>EmployeesView.cs</DependentUpon>
+    <Compile Include="View\EmployeesListControl.Designer.cs">
+      <DependentUpon>EmployeesListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeesViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\EmployeesViewControl.Designer.cs">
+      <DependentUpon>EmployeesViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmLogin.cs">
       <SubType>Form</SubType>
@@ -99,11 +114,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\AddEmployeeControl.resx">
+      <DependentUpon>AddEmployeeControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\DashboardView.resx">
       <DependentUpon>DashboardView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\EmployeesView.resx">
-      <DependentUpon>EmployeesView.cs</DependentUpon>
+    <EmbeddedResource Include="View\EmployeesListControl.resx">
+      <DependentUpon>EmployeesListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EmployeesViewControl.resx">
+      <DependentUpon>EmployeesViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
@@ -112,6 +133,8 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="bin\Debug\LenardHRIS.exe.config" />
+    <None Include="obj\Release\LenardHRIS.csproj.AssemblyReference.cache" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -135,13 +158,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LenardHRDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LenardHRDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include=".gitignore" />
+    <Content Include="bin\Debug\LenardHRIS.exe" />
+    <Content Include="bin\Debug\LenardHRIS.pdb" />
+    <Content Include="Database\LenardHRDB.ldf">
       <DependentUpon>LenardHRDB.mdf</DependentUpon>
     </Content>
+    <None Include="Database\LenardHRDB.mdf" />
+    <Content Include="Resources\Blank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

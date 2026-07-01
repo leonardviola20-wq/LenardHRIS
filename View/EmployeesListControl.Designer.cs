@@ -33,7 +33,6 @@ namespace LenardHRIS.View
             this.components = new System.ComponentModel.Container();
             this.LblEmployees = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.BtnAddEmployees = new System.Windows.Forms.Button();
             this.BtnExport = new System.Windows.Forms.Button();
             this.BtnImport = new System.Windows.Forms.Button();
             this.Tlp = new System.Windows.Forms.TableLayoutPanel();
@@ -63,6 +62,7 @@ namespace LenardHRIS.View
             this.BtnPrev = new System.Windows.Forms.Button();
             this.BtnNext = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.BtnAddEmployee = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.Tlp.SuspendLayout();
             this.PnlNewEmployees.SuspendLayout();
@@ -88,7 +88,7 @@ namespace LenardHRIS.View
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.panel3.Controls.Add(this.BtnAddEmployees);
+            this.panel3.Controls.Add(this.BtnAddEmployee);
             this.panel3.Controls.Add(this.BtnExport);
             this.panel3.Controls.Add(this.BtnImport);
             this.panel3.Controls.Add(this.LblEmployees);
@@ -97,22 +97,6 @@ namespace LenardHRIS.View
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(898, 64);
             this.panel3.TabIndex = 3;
-            // 
-            // BtnAddEmployees
-            // 
-            this.BtnAddEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnAddEmployees.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.BtnAddEmployees.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
-            this.BtnAddEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAddEmployees.Font = new System.Drawing.Font("Open Sans", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAddEmployees.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnAddEmployees.Location = new System.Drawing.Point(751, 13);
-            this.BtnAddEmployees.Name = "BtnAddEmployees";
-            this.BtnAddEmployees.Size = new System.Drawing.Size(141, 36);
-            this.BtnAddEmployees.TabIndex = 4;
-            this.BtnAddEmployees.Text = "Add Employees";
-            this.BtnAddEmployees.UseVisualStyleBackColor = false;
-            this.BtnAddEmployees.Click += new System.EventHandler(this.BtnAddEmployee_Click);
             // 
             // BtnExport
             // 
@@ -459,6 +443,22 @@ namespace LenardHRIS.View
             this.BtnNext.UseVisualStyleBackColor = true;
             this.BtnNext.Click += new System.EventHandler(this.BtnNext_Click);
             // 
+            // BtnAddEmployee
+            // 
+            this.BtnAddEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnAddEmployee.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.BtnAddEmployee.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.BtnAddEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddEmployee.Font = new System.Drawing.Font("Open Sans", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAddEmployee.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnAddEmployee.Location = new System.Drawing.Point(751, 13);
+            this.BtnAddEmployee.Name = "BtnAddEmployee";
+            this.BtnAddEmployee.Size = new System.Drawing.Size(138, 36);
+            this.BtnAddEmployee.TabIndex = 4;
+            this.BtnAddEmployee.Text = "Add Employee";
+            this.BtnAddEmployee.UseVisualStyleBackColor = false;
+            this.BtnAddEmployee.Click += new System.EventHandler(this.BtnAddEmployee_Click);
+            // 
             // EmployeesListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -508,7 +508,6 @@ namespace LenardHRIS.View
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.DataGridView DgvEmployeesList;
         private System.Windows.Forms.Button BtnImport;
-        private System.Windows.Forms.Button BtnAddEmployees;
         private System.Windows.Forms.Button BtnExport;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.TextBox TxtSearchName;
@@ -526,5 +525,6 @@ namespace LenardHRIS.View
         private System.Windows.Forms.Label LblActiveCount;
         private System.Windows.Forms.Label LblTotalCount;
         private System.Windows.Forms.Label LblNewCount;
+        private System.Windows.Forms.Button BtnAddEmployee;
     }
 }
